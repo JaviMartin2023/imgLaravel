@@ -78,7 +78,7 @@
     @foreach ($images as $image)
         <div class="col-md-3">
             <!-- Mostrar la imagen usando Storage::url() -->
-            <img src="{{ Storage::url('private/ejercicio/' . $image->stored_name) }}" class="img-thumbnail" alt="{{ $image->original_name }}">
+            <img src="{{ asset('ejercicio/' . $image->stored_name) }}" alt="{{ $image->original_name }}" style="max-width: 100px; height: auto;">
             <div class="text-center mt-2">
                 <a href="{{ route('images.show', $image->id) }}" class="btn btn-info">Ver</a>
                 <a href="{{ route('images.destroy', $image->id) }}" class="btn btn-danger">Eliminar</a>

@@ -6,3 +6,6 @@ use App\Http\Controllers\ImageController;
 // Define una sola ruta para la raíz que apunte a tu controlador
 Route::get('/', [ImageController::class, 'index']);
 Route::resource('images', ImageController::class);
+Route::get('/images/{storedName}', [ImageController::class, 'getImage'])->name('images.get');
+
+

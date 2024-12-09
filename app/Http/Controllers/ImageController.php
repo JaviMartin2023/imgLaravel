@@ -32,6 +32,10 @@ class ImageController extends Controller
         $originalName = $image->getClientOriginalName();
         $storedName = Carbon::now()->format('Y_m_d_H_i_s') . '_' . $originalName;
 
+        if (!Storage::exists('private/ejercicio')) {
+            Storage::makeDirectory('private/ejercicio');
+        }        
+
         $path = $image->storeAs('private/ejercicio', $storedName);
 
         Image::create([
@@ -50,4 +54,22 @@ class ImageController extends Controller
 
         return redirect()->route('images.index');
     }
+
+    public function getImage($storedName)
+{
+    $path = 'private/ejercicio/' . $storedName;
+
+    // Verifica si el archivo existe
+    if (!Storage::exists($path)) {
+        abort(404, 'Imagen no encontrada');
+    }
+
+    // Obtiene el archivo y su tipo MIME
+    $file = Storage::get($path);
+    $type = Storage::mimeType($path);
+
+    // Devuelve la imagen con el encabezado correcto
+    return response($file)->header('Content-Type', $type);
+}
+
 }

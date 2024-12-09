@@ -48,8 +48,8 @@
 <body>
     <div class="container">
         <div class="image-details">
-            <img src="{{ $image->imageUrl }}" alt="Imagen">
-            <div class="image-info">
+        <img src="{{ asset('ejercicio/' . $image->stored_name) }}" alt="{{ $image->original_name }}" style="max-width: 600px; height: auto;">
+        <div class="image-info">
                 <p><strong>Nombre Original:</strong> {{ $image->original_name }}</p>
                 <p><strong>Nombre Guardado:</strong> {{ $image->stored_name }}</p>
                 <p><strong>Fecha:</strong> {{ $image->created_at->format('d-m-Y H:i:s') }}</p>
@@ -58,6 +58,7 @@
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="delete-button">Eliminar Imagen</button>
+                
             </form>
         </div>
     </div>
